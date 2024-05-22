@@ -7,8 +7,11 @@ use Faker\Factory;
 class Generator
 {
     protected \Faker\Generator $faker;
+
     protected $params;
+
     protected $cases;
+
     protected $rules;
 
     /**
@@ -22,17 +25,14 @@ class Generator
 
     /**
      * Initialize the params and rules and generates the test cases
-     *
-     * @param array|null $rules
-     * @return array|null
      */
     public function generate(?array $rules): ?array
     {
         $this->params = array_keys($rules);
         $this->rules = array_values($rules);
+
         return $this->generateCase();
     }
-
 
     /**
      * Generate the cases for testing
@@ -43,13 +43,12 @@ class Generator
     {
         $this->generateFailureCase();
         $this->generateSuccessCase();
+
         return $this->cases;
     }
 
     /**
      * Generate the success test case
-     *
-     * @return void
      */
     protected function generateSuccessCase(): void
     {
@@ -65,13 +64,11 @@ class Generator
     /**
      * Get the value for the given field with the applied rules
      *
-     * @param string $param
      * @param [array] $rules
-     * @return string
      */
     protected function getValue(string $param, $rules): string
     {
-        if(is_string($rules)) {
+        if (is_string($rules)) {
             $rules = explode('|', $rules);
         }
         $value = '';
@@ -123,7 +120,7 @@ class Generator
                 $value = $this->faker->date;
                 break;
             case $this->isDateFormat($rules):
-                $format = array_values(array_filter($rules, function($val){
+                $format = array_values(array_filter($rules, function ($val) {
                     return preg_match('/^date_format/', $val);
                 }));
                 $format = str_replace('date_format:', '', $format[0]);
@@ -136,9 +133,6 @@ class Generator
 
     /**
      * Check whether email is applicable for the given field
-     *
-     * @param array $rules
-     * @return boolean
      */
     protected function isEmail(array $rules): bool
     {
@@ -147,10 +141,6 @@ class Generator
 
     /**
      * Check whether company name is applicable for the given field
-     *
-     * @param array $rules
-     * @param string $param
-     * @return boolean
      */
     protected function isCompanyName(array $rules, string $param): bool
     {
@@ -159,10 +149,6 @@ class Generator
 
     /**
      * Check whether address is applicable for the given field
-     *
-     * @param array $rules
-     * @param string $param
-     * @return boolean
      */
     protected function isAddress(array $rules, string $param): bool
     {
@@ -172,9 +158,7 @@ class Generator
     /**
      * Check whether name is applicable for the given field
      *
-     * @param array $rules
-     * @param string $param
-     * @return boolean
+     * @param  string  $param
      */
     protected function isName(array $rules, $param): bool
     {
@@ -184,9 +168,9 @@ class Generator
     /**
      * Check whether stree name is applicable for the given field
      *
-     * @param array $rules
-     * @param string $param
-     * @return boolean
+     * @param  array  $rules
+     * @param  string  $param
+     * @return bool
      */
     protected function isStreetName($rules, $param)
     {
@@ -196,9 +180,9 @@ class Generator
     /**
      * Check whether street address is applicable for the given field
      *
-     * @param array $rules
-     * @param string $param
-     * @return boolean
+     * @param  array  $rules
+     * @param  string  $param
+     * @return bool
      */
     protected function isStreetAddress($rules, $param)
     {
@@ -208,9 +192,9 @@ class Generator
     /**
      * Check whether city is applicable for the given field
      *
-     * @param array $rules
-     * @param string $param
-     * @return boolean
+     * @param  array  $rules
+     * @param  string  $param
+     * @return bool
      */
     protected function isCity($rules, $param)
     {
@@ -220,9 +204,9 @@ class Generator
     /**
      * Check whether state is applicable for the given field
      *
-     * @param array $rules
-     * @param string $param
-     * @return boolean
+     * @param  array  $rules
+     * @param  string  $param
+     * @return bool
      */
     protected function isState($rules, $param)
     {
@@ -232,9 +216,9 @@ class Generator
     /**
      * Check whether country is applicable for the given field
      *
-     * @param array $rules
-     * @param string $param
-     * @return boolean
+     * @param  array  $rules
+     * @param  string  $param
+     * @return bool
      */
     protected function isCountry($rules, $param)
     {
@@ -244,20 +228,20 @@ class Generator
     /**
      * Check whether zip is applicable for the given field
      *
-     * @param array $rules
-     * @param string $param
-     * @return boolean
+     * @param  array  $rules
+     * @param  string  $param
+     * @return bool
      */
     protected function isZip($rules, $param)
     {
-        return (strpos('zip', $param) !== false || strpos('pin', $param) !== false ) && in_array('string', $rules);
+        return (strpos('zip', $param) !== false || strpos('pin', $param) !== false) && in_array('string', $rules);
     }
 
     /**
      * Check whether latitude is applicable for the given field
      *
-     * @param string $param
-     * @return boolean
+     * @param  string  $param
+     * @return bool
      */
     protected function isLatitude($param)
     {
@@ -267,8 +251,8 @@ class Generator
     /**
      * Check whether longitude is applicable for the given field
      *
-     * @param string $param
-     * @return boolean
+     * @param  string  $param
+     * @return bool
      */
     protected function isLongitude($param)
     {
@@ -278,8 +262,8 @@ class Generator
     /**
      * Check whether phone number is applicable for the given field
      *
-     * @param string $param
-     * @return boolean
+     * @param  string  $param
+     * @return bool
      */
     protected function isPhone($param)
     {
@@ -289,8 +273,8 @@ class Generator
     /**
      * Check whether boolean type is applicable for the given field
      *
-     * @param array $rules
-     * @return boolean
+     * @param  array  $rules
+     * @return bool
      */
     protected function isBoolean($rules)
     {
@@ -300,8 +284,8 @@ class Generator
     /**
      * Check whether date type is applicable for the given field
      *
-     * @param array $rules
-     * @return boolean
+     * @param  array  $rules
+     * @return bool
      */
     protected function isDate($rules)
     {
@@ -311,14 +295,15 @@ class Generator
     /**
      * Check whether date or time is applicable for the given field
      *
-     * @param array $rules
-     * @return boolean
+     * @param  array  $rules
+     * @return bool
      */
     protected function isDateFormat($rules)
     {
-        $format = array_filter($rules, function($val){
+        $format = array_filter($rules, function ($val) {
             return preg_match('/^date_format/', $val);
         });
+
         return count($format);
     }
 
