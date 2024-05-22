@@ -14,13 +14,12 @@ class LaravelTestGeneratorCommand extends Command
 
     protected $description = 'Automatically generates unit test cases for this application';
 
-
     public function handle(): int
     {
         $options = [
             'directory' => $this->option('dir') ? $this->option('dir') : '',
-            'sync' => (bool)$this->option('sync'),
-            'filter' => $this->option('filter')
+            'sync' => (bool) $this->option('sync'),
+            'filter' => $this->option('filter'),
         ];
         $generator = new Generator($options);
         $generator->generate();
