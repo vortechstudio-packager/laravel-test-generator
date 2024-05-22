@@ -21,7 +21,7 @@ class Generator
     }
 
     /**
-     * Initialize the params and rules and generates the test cases
+     * Initialize the params and rules and generates the test casesOK
      *
      * @param array|null $rules
      * @return array|null
