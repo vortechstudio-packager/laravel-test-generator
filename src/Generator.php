@@ -23,10 +23,9 @@ class Generator
     /**
      * Initialize the params and rules and generates the test casesOK
      *
-     * @param array|null $rules
      * @return array|null
      */
-    public function generate(?array $rules): ?array
+    public function generate(): ?array
     {
         return $this->generateCase();
     }
