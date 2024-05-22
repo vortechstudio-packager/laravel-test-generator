@@ -2,6 +2,9 @@
 
 namespace Vortechstudio\LaravelTestGenerator;
 
+use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
+
 class Formatter
 {
     protected array $cases;
