@@ -28,8 +28,6 @@ class Generator
      */
     public function generate(?array $rules): ?array
     {
-        $this->params = array_keys($rules);
-        $this->rules = array_values($rules);
         return $this->generateCase();
     }
 
